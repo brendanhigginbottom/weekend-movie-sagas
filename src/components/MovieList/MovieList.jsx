@@ -16,7 +16,8 @@ function MovieList() {
 
     const showDetails = (event) => {
         console.log(Number(event.target.dataset.value));
-        //history.push('/details');
+        const selectedMovieId = Number(event.target.dataset.value);
+        history.push(`/details/${selectedMovieId}`);
     }
 
     return (
@@ -27,6 +28,7 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
+                            {/* Added data-value to extract ID to pass on to GET for /details */}
                             <img data-value={movie.id} onClick={showDetails} src={movie.poster} alt={movie.title}/>
                         </div>
                     );

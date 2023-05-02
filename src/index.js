@@ -14,6 +14,11 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie)
+}
+
+function* fetchMovie() {
+    //saga to fetch specific movie
 }
 
 function* fetchAllMovies() {
@@ -41,6 +46,15 @@ const movies = (state = [], action) => {
             return state;
     }
 }
+
+const selectedMovie = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SELECTED_MOVIE':
+            return action.payload;
+        default:
+            return state;
+    }
+ }
 
 // Used to store the movie genres
 const genres = (state = [], action) => {

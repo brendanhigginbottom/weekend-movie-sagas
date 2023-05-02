@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import { useHistory } from 'react-router-dom';
+// import ReactDom from 'react-dom';
 
 function MovieList() {
 
@@ -14,8 +15,8 @@ function MovieList() {
     }, []);
 
     const showDetails = (event) => {
-        console.log('Testing photo click');
-        history.push('/details');
+        console.log(Number(event.target.dataset.value));
+        //history.push('/details');
     }
 
     return (
@@ -26,7 +27,7 @@ function MovieList() {
                     return (
                         <div key={movie.id} >
                             <h3>{movie.title}</h3>
-                            <img onClick={showDetails} src={movie.poster} alt={movie.title}/>
+                            <img data-value={movie.id} onClick={showDetails} src={movie.poster} alt={movie.title}/>
                         </div>
                     );
                 })}

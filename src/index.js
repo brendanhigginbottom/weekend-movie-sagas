@@ -19,6 +19,13 @@ function* rootSaga() {
 
 function* fetchMovie() {
     //saga to fetch specific movie
+    try {
+        const selectedMovie = yield axios.get('/api/details');
+        console.log('get selected movie', selectedMovie.data);
+        yield put({ type: 'SET_SELECTED_MOVIE', payload: selectedMovie.data })
+    } catch {
+        console.log('get selected movie error');
+    }
 }
 
 function* fetchAllMovies() {
@@ -31,7 +38,7 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }
-        
+
 }
 
 // Create sagaMiddleware
@@ -47,6 +54,7 @@ const movies = (state = [], action) => {
     }
 }
 
+// Used to store selected movie returned from the server
 const selectedMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_SELECTED_MOVIE':
@@ -54,7 +62,7 @@ const selectedMovie = (state = [], action) => {
         default:
             return state;
     }
- }
+}
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -71,6 +79,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

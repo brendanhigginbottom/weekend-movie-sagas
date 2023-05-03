@@ -10,17 +10,21 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie)
+    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie(movie))
 }
 
-function* fetchMovie() {
+function* fetchMovie(movie) {
     //saga to fetch specific movie
+    // const selectedId = useSelector(store => store.selectedMovieId);
     try {
-        const selectedMovie = yield axios.get('/api/details');
+        const selectedMovie = yield axios.get(`/api/details/${movie}`);
         console.log('get selected movie', selectedMovie.data);
         yield put({ type: 'SET_SELECTED_MOVIE', payload: selectedMovie.data })
     } catch {

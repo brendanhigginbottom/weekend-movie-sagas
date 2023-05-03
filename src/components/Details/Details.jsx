@@ -6,10 +6,11 @@ import { useHistory } from 'react-router-dom';
 // seeing if it works. Seems to!
 export default function Details() {
     const dispatch = useDispatch();
+    const movie = useSelector(store => store.selectedMovie)
 
     useEffect(() => {
         //dispatch to saga to GET movie details
-        dispatch({ type: 'FETCH_SELECTED_MOVIE' });
+        dispatch({ type: 'FETCH_SELECTED_MOVIE', fetchSelectedMovie(movie) });
     }, []);
 
 
@@ -17,9 +18,9 @@ export default function Details() {
         <>
             <h1>Details</h1>
             <div>
-                {/* <h3>{movie.title}</h3> */}
+                <h3>{movie.title}</h3> 
                 {/* Added data-value to extract ID to pass on to GET for /details */}
-                {/* <img data-value={movie.id} onClick={showDetails} src={movie.poster} alt={movie.title}/> */}
+                <img data-value={movie.id} src={movie.poster} alt={movie.title}/>
             </div>
         </>
     );

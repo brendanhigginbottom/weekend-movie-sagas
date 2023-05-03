@@ -7,9 +7,9 @@ import { useHistory } from 'react-router-dom';
 export default function Details() {
     const dispatch = useDispatch();
 
-    const useEffect = (() => {
+    useEffect(() => {
         //dispatch to saga to GET movie details
-
+        dispatch({ type: 'FETCH_SELECTED_MOVIE' });
     }, []);
 
 

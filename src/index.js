@@ -53,6 +53,15 @@ const movies = (state = [], action) => {
             return state;
     }
 }
+// Used to store selected movie id for GET request
+const selectedMovieId = (state = 0, action) => {
+    switch (action.type) {
+        case 'SET_SELECTED_MOVIE_ID':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 // Used to store selected movie returned from the server
 const selectedMovie = (state = [], action) => {
@@ -80,6 +89,7 @@ const storeInstance = createStore(
         movies,
         genres,
         selectedMovie,
+        selectedMovieId,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

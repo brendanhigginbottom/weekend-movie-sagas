@@ -5,7 +5,7 @@ import Details from '../Details/Details.jsx';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const movieId = useSelector(store => store.selectedMovie);
+  
 
   return (
     <div className="App">

@@ -17,14 +17,14 @@ import { useSelector } from 'react-redux';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie(movie))
+    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie)
 }
 
-function* fetchMovie(movie) {
+function* fetchMovie(action) {
     //saga to fetch specific movie
     // const selectedId = useSelector(store => store.selectedMovieId);
     try {
-        const selectedMovie = yield axios.get(`/api/details/${movie}`);
+        const selectedMovie = yield axios.get(`/api/details/${action.payload}`);
         console.log('get selected movie', selectedMovie.data);
         yield put({ type: 'SET_SELECTED_MOVIE', payload: selectedMovie.data })
     } catch {

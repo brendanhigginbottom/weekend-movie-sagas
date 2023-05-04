@@ -10,8 +10,10 @@ export default function Details() {
 
     useEffect(() => {
         //dispatch to saga to GET movie details
-        dispatch({ type: 'FETCH_SELECTED_MOVIE', fetchSelectedMovie(movie) });
+        dispatch({ type: 'FETCH_SELECTED_MOVIE', payload: movie });
     }, []);
+
+    // live solve with client-side url params
 
 
     return (

@@ -21,7 +21,8 @@ function MovieList() {
             type: 'SET_SELECTED_MOVIE_ID',
             payload: selectedMovieId,
         })
-        history.push(`/details/${selectedMovieId}`);
+        // history.push(`/details/${selectedMovieId}`); Need to research URL params for this to work
+        history.push('/details');
     }
 
     return (

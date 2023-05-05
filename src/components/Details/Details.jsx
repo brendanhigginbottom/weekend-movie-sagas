@@ -24,7 +24,7 @@ function Details() {
     const backButton = () => {
         history.push('/');
     }
-
+    console.log(selectedMovie);
     return (
         <>
         {/* Conditionally rendering based on whether saga has 
@@ -37,6 +37,22 @@ function Details() {
                     <div>
                         <h3>{selectedMovie[0].title}</h3> 
                         <img src={selectedMovie[0].poster} alt={selectedMovie[0].title}/>
+                        <br />
+                        {/* Conditional rendering for genre text being plural */}
+                        <div> {selectedMovie.length === 1 ? (
+                            'Genre:'
+                        ) : (
+                            'Genres:'
+                        )
+                            } 
+                        {/* Might be a better way to query the database to not have to map
+                            over the results, but this works! */}  
+                        {selectedMovie.map(genre =>(
+                             <span key={genre.name}>{genre.name}    </span>
+                                
+                        ))
+                        }
+                        </div>  
                         <br />
                         <p>{selectedMovie[0].description}</p>
                         <br />

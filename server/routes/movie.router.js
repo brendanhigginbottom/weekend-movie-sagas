@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   console.log(req.params.id);
   const id = req.params.id;
   // let queryText = 'SELECT * FROM "movies" WHERE "id" = $1';
-  let queryText = `SELECT * FROM "movies"
+  let queryText = `SELECT "movies".*, "genres"."name" FROM "movies"
   JOIN "movies_genres" ON "movies"."id" = "movies_genres"."movie_id"
   JOIN "genres" ON "movies_genres"."genre_id" = "genres"."id"
   WHERE "movies"."id" = $1;`

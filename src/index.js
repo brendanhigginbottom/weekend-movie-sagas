@@ -11,14 +11,24 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie)
+    yield takeEvery('FETCH_SELECTED_MOVIE', fetchMovie);
 }
 
-function* fetchMovie() {
+function* fetchMovie(action) {
     //saga to fetch specific movie
+    try {
+        console.log(action.payload)
+        const selectedMovie = yield axios.get(`/api/movie/${action.payload}`);
+        console.log('get selected movie', selectedMovie.data);
+        yield put({ type: 'SET_SELECTED_MOVIE', payload: selectedMovie.data })
+    } catch {
+        console.log('get selected movie error');
+    }
 }
 
 function* fetchAllMovies() {
@@ -31,7 +41,7 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }
-        
+
 }
 
 // Create sagaMiddleware
@@ -46,7 +56,17 @@ const movies = (state = [], action) => {
             return state;
     }
 }
+// Used to store selected movie id for GET request
+const selectedMovieId = (state = 0, action) => {
+    switch (action.type) {
+        case 'SET_SELECTED_MOVIE_ID':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
+// Used to store selected movie returned from the server
 const selectedMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_SELECTED_MOVIE':
@@ -54,7 +74,7 @@ const selectedMovie = (state = [], action) => {
         default:
             return state;
     }
- }
+}
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
@@ -71,6 +91,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedMovie,
+        selectedMovieId,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

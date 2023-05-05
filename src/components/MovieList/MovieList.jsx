@@ -17,7 +17,12 @@ function MovieList() {
     const showDetails = (event) => {
         console.log(Number(event.target.dataset.value));
         const selectedMovieId = Number(event.target.dataset.value);
-        history.push(`/details/${selectedMovieId}`);
+        dispatch({
+            type: 'SET_SELECTED_MOVIE_ID',
+            payload: selectedMovieId,
+        })
+        // history.push(`/details/${selectedMovieId}`); Need to research URL params for this to work
+        history.push('/details');
     }
 
     return (

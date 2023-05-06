@@ -52,7 +52,7 @@ function Details() {
                                 
                         ))
                         }
-                        </div>  
+                        </div> 
                         <br />
                         <p>{selectedMovie[0].description}</p>
                         <br />

@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+// Imports for MUI Cards
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+// Import for MUI Button
+import Button from '@mui/material/Button';
+// Import for typography
+import Typography from '@mui/material/Typography';
 
 
 function Details() {
@@ -17,8 +25,6 @@ function Details() {
         dispatch({ type: 'FETCH_SELECTED_MOVIE', payload: movieId });
     }, []);
 
-    //    console.log(selectedMovie, selectedMovie[0].title);
-
     // live solve with client-side url params
 
     const backButton = () => {
@@ -26,41 +32,43 @@ function Details() {
     }
     console.log(selectedMovie);
     return (
-        <>
-        {/* Conditionally rendering based on whether saga has 
+        <Card variant="outlined" sx={{ margin: "3em" }}>
+            {/* Conditionally rendering based on whether saga has 
             returned data from server to selectedMovie reducer */}
             {selectedMovie.length === 0 ? (
                 <h1>Loading</h1>
             ) : (
-                <div>
-                    <h1>{selectedMovie[0].title}</h1>
-                    <div>
-                        <h3>{selectedMovie[0].title}</h3> 
-                        <img src={selectedMovie[0].poster} alt={selectedMovie[0].title}/>
-                        <br />
-                        {/* Conditional rendering for genre text being plural */}
-                        <div> {selectedMovie.length === 1 ? (
-                            'Genre:'
-                        ) : (
-                            'Genres:'
-                        )
-                            } 
-                        {/* Might be a better way to query the database to not have to map
-                            over the results, but this works! */}  
-                        {selectedMovie.map(genre =>(
-                             <span key={genre.name}>{genre.name}    </span>
-                                
-                        ))
-                        }
-                        </div> 
-                        <br />
-                        <p>{selectedMovie[0].description}</p>
-                        <br />
-                        <button onClick={backButton}>Return</button>
-                    </div>
-                </div>
+                <CardContent>
+                        <div>
+                            <Typography variant="h3">{selectedMovie[0].title}</Typography>
+                            <img src={selectedMovie[0].poster} alt={selectedMovie[0].title} />
+                            <br />
+                            {/* Conditional rendering for genre text being plural */}
+                            <Typography variant="h5"> 
+                                {selectedMovie.length === 1 ? (
+                                'Genre:'
+                                ) : (
+                                'Genres:'
+                                )
+                                }
+                                {/* Might be a better way to query the database to not have to map
+                                over the results but this works! */}
+                                {selectedMovie.map(genre => (
+                                    <span key={genre.name}>{genre.name} </span>
+
+                                ))
+                                }
+                            </Typography>
+                            <br />
+                            <Typography variant="body1">{selectedMovie[0].description}</Typography>
+                            <br />
+                            <CardActions>
+                                <Button variant="outlined" onClick={backButton}>Return to list</Button>
+                            </CardActions>
+                        </div>
+                </CardContent>
             )}
-        </>
+        </Card>
     );
 }
 

@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import { useHistory } from 'react-router-dom';
-// import ReactDom from 'react-dom';
+// imports for MUI Grid
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+// imports for MUI Cards
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+
 
 function MovieList() {
 
@@ -28,17 +34,25 @@ function MovieList() {
     return (
         <main>
             <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            {/* Added data-value to extract ID to pass on to GET for /details */}
-                            <img data-value={movie.id} onClick={showDetails} src={movie.poster} alt={movie.title}/>
-                        </div>
-                    );
-                })}
-            </section>
+            <Box sx={{ flexGrow: 1 }}>
+                {/* <section className="movies"> */}
+                <Grid className="movies" container spacing={2}>
+                    {movies.map(movie => {
+                        return (
+                            <Grid item xs={3} key={movie.id}>
+                                <Card variant="outlined">
+                                    <CardContent>
+                                        <h3>{movie.title}</h3>
+                                        {/* Added data-value to extract ID to pass on to GET for /details */}
+                                        <img data-value={movie.id} onClick={showDetails} src={movie.poster} alt={movie.title} />
+                                    </CardContent> 
+                                </Card>
+                            </Grid>
+                        );
+                    })}
+                {/* </section> */}
+                </Grid>
+            </Box>
         </main>
 
     );

@@ -10,7 +10,8 @@ This application uses Sagas to dispatch server requests, in this case fetching a
 
 
 ## Screen Shots
-<img width="1442" alt="Screenshot 2023-06-10 at 2 37 43 PM" src="https://github.com/brendanhigginbottom/weekend-movie-sagas/assets/111456731/b4f6940c-9db2-45cd-8d5b-aae8dc11d87e">
+
+<img width="1248" alt="Screenshot 2023-06-10 at 2 44 26 PM" src="https://github.com/brendanhigginbottom/weekend-movie-sagas/assets/111456731/f450eea8-2538-47f6-bf4c-6619494bd63d">
 
 <img width="1451" alt="Screenshot 2023-06-10 at 2 38 04 PM" src="https://github.com/brendanhigginbottom/weekend-movie-sagas/assets/111456731/e27b6abc-52ac-4a89-aa01-82f61a5ccc4b">
  
